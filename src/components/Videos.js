@@ -1,9 +1,11 @@
 
 import { formatDistanceToNow } from 'date-fns'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
 const Videos = (props) => {
+    const darkMode = useSelector(store => store.darkmode);
 
     const { videoList } = props;
 
@@ -17,6 +19,7 @@ const Videos = (props) => {
         <Link to={`/videosplay/${id}`}>
 
             <div>
+
                 <img className="m-2 w-64" src={thumbnail_url} alt={title} />
             </div>
             <div className='flex w-64'>
@@ -25,7 +28,7 @@ const Videos = (props) => {
                 </div>
                 <div>
                     <div>
-                        <p className="text-about font-medium text-base">{title}</p>
+                        <p className={`text-about font-medium text-base ${!darkMode && "text-slate-300"}`}>{title}</p>
                         <p className="text-description font-medium text-sm">{channel.name}</p>
                     </div>
                     <div>

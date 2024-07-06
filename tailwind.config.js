@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -15,7 +16,9 @@ module.exports = {
         description: "#94a3b8",
         videoTitle: "#1e293b",
         name: "#212121",
-        red: "#ff0b37"
+        red: "#ff0b37",
+        darkHeader: "#231f20",
+        darkBody: "#0f0f0f"
 
       },
     },

@@ -5,12 +5,14 @@ const savedSlice = createSlice(
         name: "save",
         initialState: {
             items: [],
+
         },
         reducers: {
             addedItems: (state, action) => {
                 state.items.push(action.payload)
 
             },
+
 
         }
     }
