@@ -30,7 +30,7 @@ const Header = () => {
             <div className="flex">
                 <button onClick={toggleDarkMode}>{darkMode ? <IoMoon className="text-black m-1 mt-3 text-2xl cursor-pointer" /> : <FiSun className="text-white m-1 mt-3 text-2xl cursor-pointer" />}</button>
                 <img className="w-12 p-2" src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png" alt="profile" />
-                <button type="submit" className="text-lightBlue font-medium w-16 mt-2 h-8 pb-1 rounded border-2 border-lightBlue" onClick={onClickLogout}>Logout</button>
+                <button type="submit" className={`text-lightBlue font-medium w-16 mt-2 h-8 pb-1 rounded border-2 border-lightBlue ${!darkMode && "text-white border-slate-100"}`} onClick={onClickLogout}>Logout</button>
             </div>
         </div>
     );

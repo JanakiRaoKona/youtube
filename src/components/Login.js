@@ -1,8 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
 
 const Login = () => {
+    const darkMode = useSelector(store => store.darkmode);
+    console.log(darkMode)
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -46,11 +49,11 @@ const Login = () => {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen">
-            <div className="shadow-lg p-10 rounded">
+        <div className={`flex flex-col justify-center items-center h-screen ${!darkMode && "bg-darkHeader"}`}>
+            <div className={`shadow-lg p-10 rounded ${!darkMode && "bg-darkBody"}`}>
                 <form onSubmit={submitForm}>
                     <div className="flex justify-center mb-3">
-                        <img className="w-28" src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" alt="login-logo" />
+                        <img className="w-28" src={darkMode ? "https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" : "https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png"} alt="login-logo" />
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="userName" className="text-slate-400 text-sm mb-1 font-medium">USERNAME</label>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const SavedVideos = () => {
     const videoList = useSelector(store => store.save.items);
 
-    if (videoList.length === 0) return <h1>No Saved Videos</h1>;
+    if (videoList.length === 0) return <h1 className="h-screen">No Saved Videos</h1>;
     console.log(videoList);
 
     return (

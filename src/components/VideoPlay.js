@@ -8,14 +8,16 @@ import { BiSolidDislike } from "react-icons/bi";
 import { MdDataSaverOn } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux"
 import { addedItems } from '../utlis/savedSlice';
+import { activelike, activeUnlike, savedButton } from '../utlis/likeUnlike';
 
 const VideoPlay = () => {
     const { resId } = useParams();
     const darkMode = useSelector(store => store.darkmode);
+    const likeToggle = useSelector(store => store.likeunlike);
+    const { like, unlike, saveLike } = likeToggle
+    console.log(like, unlike, saveLike);
+
     const [videosList, setVideosList] = useState(null);
-    const [likeToggle, setLikeToggle] = useState(false);
-    const [unLikeToggle, setUnLikeToggle] = useState(false);
-    const [saveItem, setSaveItem] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -24,18 +26,17 @@ const VideoPlay = () => {
     }, [resId]);
 
     const handleLike = () => {
-        setLikeToggle(!likeToggle);
-        setUnLikeToggle(false);
+        dispatch(activelike(!like))
+        dispatch(activeUnlike(false))
     }
-
     const handleUnLike = () => {
-        setUnLikeToggle(!unLikeToggle);
-        setLikeToggle(false);
+        dispatch(activelike(false))
+        dispatch(activeUnlike(!unlike))
     }
 
     const handleSave = (videosList) => {
-        setSaveItem(!saveItem);
-        dispatch(addedItems(videosList.video_details))
+        dispatch(savedButton(!saveLike));
+        dispatch(addedItems(videosList.video_details));
 
     }
 
@@ -62,20 +63,20 @@ const VideoPlay = () => {
                 <ReactPlayer url={video_url} width="100%" controls />
             </div>
             <div>
-                <p className={`text-videoTitle font-semibold text-lg mt-2 w-4/6 ${!darkMode && "text-slate-300"}`}>{title}</p>
+                <p className={`text-videoTitle font-semibold text-lg mt-2 w-4/6 ${!darkMode && "text-slate-50"}`}>{title}</p>
                 <div className="flex justify-between w-4/6">
                     <div>
                         <span className="mr-3 text-description font-normal text-md">{view_count} Views</span>
                         <span className="mr-3 text-description font-normal text-md">Published on {published_at}</span>
                     </div>
                     <div className="flex">
-                        <button onClick={handleLike} className={`mr-2 text-description font-normal text-md flex justify-center items-center ${likeToggle && "text-blue-500"}`} type="button">
+                        <button onClick={handleLike} className={`mr-2 text-description font-normal text-md flex justify-center items-center ${like && "text-blue-600"}`} type="button">
                             <BiSolidLike /> Like
                         </button>
-                        <button onClick={handleUnLike} className={`mr-2 text-description font-normal text-md flex justify-center items-center ${unLikeToggle && "text-blue-500"}`} type="button">
+                        <button onClick={handleUnLike} className={`mr-2 text-description font-normal text-md flex justify-center items-center ${unlike && "text-blue-600"}`} type="button">
                             <BiSolidDislike /> Dislike
                         </button>
-                        <button onClick={() => handleSave(videosList)} className={`mr-2 text-description font-normal text-md flex justify-center items-center ${saveItem && "text-blue-500"}`} type="button">
+                        <button onClick={() => handleSave(videosList)} className={`mr-2 text-description font-normal text-md flex justify-center items-center ${saveLike && "text-blue-600"}`} type="button">
                             <MdDataSaverOn /> Save
                         </button>
                     </div>
@@ -90,7 +91,7 @@ const VideoPlay = () => {
                                 <p className="text-description font-normal text-sm">{channel.subscriber_count} Subscribers</p>
                             </div>
                             <div>
-                                <p className={`text-slate-700 font-normal text-md w-4/6 ${!darkMode && "text-slate-300"}`}>{description}</p>
+                                <p className={`text-slate-700 font-normal text-md w-4/6 ${!darkMode && "text-slate-50"}`}>{description}</p>
                             </div>
                         </div>
                     </div>
