@@ -1,16 +1,17 @@
 import React from 'react';
+
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const SavedVideos = () => {
     const videoList = useSelector(store => store.save.items);
-
-    if (videoList.length === 0) return <h1 className="h-screen">No Saved Videos</h1>;
+    const darkMode = useSelector(store => store.darkmode);
+    if (videoList.length === 0) return <h1 className={`h-screen ${!darkMode ? "text-slate-300" : "text-about"}`}>No Saved Videos</h1>;
     console.log(videoList);
 
     return (
         <div className="h-screen">
-            <h1>Saved Videos</h1>
+            <h1 className={`${!darkMode ? "text-slate-300" : "text-about"}`}>Saved Videos</h1>
             {videoList.map(eachSaved => {
                 const { thumbnail_url, title, channel, view_count, published_at, id } = eachSaved;
                 return (
@@ -23,7 +24,7 @@ const SavedVideos = () => {
 
                                 <div>
                                     <div>
-                                        <p className="text-about font-medium text-base">{title}</p>
+                                        <p className={`${!darkMode ? "text-slate-300" : "text-about"} font-medium text-base`}>{title}</p>
                                         <p className="text-description font-medium text-sm">{channel.name}</p>
                                     </div>
                                     <div>

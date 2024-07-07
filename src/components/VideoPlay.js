@@ -63,20 +63,20 @@ const VideoPlay = () => {
                 <ReactPlayer url={video_url} width="100%" controls />
             </div>
             <div>
-                <p className={`text-videoTitle font-semibold text-lg mt-2 w-4/6 ${!darkMode && "text-slate-50"}`}>{title}</p>
+                <p className={`font-semibold text-lg mt-2 w-4/6 ${!darkMode ? "text-slate-50" : "text-videoTitle"}`}>{title}</p>
                 <div className="flex justify-between w-4/6">
                     <div>
                         <span className="mr-3 text-description font-normal text-md">{view_count} Views</span>
                         <span className="mr-3 text-description font-normal text-md">Published on {published_at}</span>
                     </div>
                     <div className="flex">
-                        <button onClick={handleLike} className={`mr-2 text-description font-normal text-md flex justify-center items-center ${like && "text-blue-600"}`} type="button">
+                        <button onClick={handleLike} className={`mr-2 font-normal text-md flex justify-center items-center ${like ? "text-blue-600" : "text-description"}`} type="button">
                             <BiSolidLike /> Like
                         </button>
-                        <button onClick={handleUnLike} className={`mr-2 text-description font-normal text-md flex justify-center items-center ${unlike && "text-blue-600"}`} type="button">
+                        <button onClick={handleUnLike} className={`mr-2 font-normal text-md flex justify-center items-center ${unlike ? "text-blue-600" : "text-description"}`} type="button">
                             <BiSolidDislike /> Dislike
                         </button>
-                        <button onClick={() => handleSave(videosList)} className={`mr-2 text-description font-normal text-md flex justify-center items-center ${saveLike && "text-blue-600"}`} type="button">
+                        <button onClick={() => handleSave(videosList)} className={`mr-2 font-normal text-md flex justify-center items-center ${saveLike ? "text-blue-600" : "text-description"}`} type="button">
                             <MdDataSaverOn /> Save
                         </button>
                     </div>
@@ -87,11 +87,11 @@ const VideoPlay = () => {
                         <img className="w-20 h-20" src={channel.profile_image_url} alt="profile" />
                         <div className="ml-4">
                             <div className="mb-3">
-                                <p className={`text-name font-semibold text-lg ${!darkMode && "text-slate-300"}`}>{channel.name}</p>
+                                <p className={`font-semibold text-lg ${!darkMode ? "text-slate-300" : "text-name"}`}>{channel.name}</p>
                                 <p className="text-description font-normal text-sm">{channel.subscriber_count} Subscribers</p>
                             </div>
                             <div>
-                                <p className={`text-slate-700 font-normal text-md w-4/6 ${!darkMode && "text-slate-50"}`}>{description}</p>
+                                <p className={`font-normal text-md w-4/6 ${!darkMode ? "text-slate-50" : "text-slate-700"}`}>{description}</p>
                             </div>
                         </div>
                     </div>
