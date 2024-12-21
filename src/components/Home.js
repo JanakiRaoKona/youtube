@@ -8,7 +8,7 @@ import { BsSearch } from 'react-icons/bs';
 
 const Home = () => {
     const [videosList, setVideosList] = useState([]);
-    const [showBanner, setShowBanner] = useState(true)
+    const [showBanner, setShowBanner] = useState(false);
     const [searchInput, setSearchInput] = useState('')
 
     const onChangeSearchInput = (event) => {
@@ -21,13 +21,15 @@ const Home = () => {
 
     useEffect(() => {
         getAllVideos()
+        setShowBanner(true);
+        console.log('home render');
 
     }, [])
 
     const handleBanner = () => {
-        setShowBanner(!showBanner)
-
+        setShowBanner(false)
     }
+
 
     const getAllVideos = async () => {
         const jwt_token = Cookies.get('jwt_token');
@@ -47,7 +49,7 @@ const Home = () => {
     }
     return (
         <div>
-            {showBanner && <div className="banner-parant relative m-2">
+            {showBanner === true && <div className="banner-parant relative m-2">
                 <div>
                     <img src="https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png" alt="banner" />
                 </div>
